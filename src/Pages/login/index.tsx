@@ -1,7 +1,24 @@
 import { Container, Content, LoginPage, FormLogin, BackgroundHome } from "./styles";
 import logo from '../../assets/logo.svg'
+import { useState } from "react";
+import { useAuth } from "../../contexts/auth";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+
+  const [ email, setEmail ] = useState("")
+  const [ password, setPassword ] = useState("")
+  const auth = useAuth()
+  const navigate = useNavigate()
+  
+  function handleSubmit(event: { preventDefault: () => void; }) {
+    event.preventDefault()
+
+    auth.signIn({email, password}, () => {
+      navigate("/")
+    })
+  }
+
   return (
     <LoginPage>
       <Container>
@@ -11,15 +28,15 @@ export function Login() {
             <h1>Bem vindo à AutoLuby</h1>
             <p>Faça login para acessar sua conta</p>
 
-            <FormLogin action="">
+            <FormLogin onSubmit={handleSubmit}>
               <div className="field">
                 <label htmlFor="input-email">Endereço de email</label>
-                <input id="input-email" placeholder="@mail.com" type="email" />
+                <input id="input-email" placeholder="@mail.com" type="email" onChange={(event) => setEmail(event.target.value)}/>
               </div>
 
               <div className="field">
                 <label htmlFor="input-password">Senha</label>
-                <input id="input-password" placeholder="senha" type="password" />
+                <input id="input-password" placeholder="senha" type="password" onChange={(event) => setPassword(event.target.value)}/>
               </div>
 
               <div className="options-password">
