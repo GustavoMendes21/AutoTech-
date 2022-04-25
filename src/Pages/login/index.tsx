@@ -8,15 +8,16 @@ export function Login() {
 
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
-  const auth = useAuth()
+
+  const { signIn, wrongCredentials } = useAuth()
   const navigate = useNavigate()
   
   function handleSubmit(event: { preventDefault: () => void; }) {
     event.preventDefault()
 
-    auth.signIn({email, password}, () => {
+    signIn({email, password}, () => {
       navigate("/")
-    })
+    }) 
   }
 
   return (

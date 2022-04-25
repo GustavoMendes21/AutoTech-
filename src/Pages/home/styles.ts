@@ -38,4 +38,8 @@ export const Header = styled.header`
 
 export const Container = styled.main`
   width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 3.1rem;
 `

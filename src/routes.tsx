@@ -51,7 +51,7 @@ export function AppRoutes() {
             element={
             <RequireAuth>
               <Home>
-                <TableCars/>
+                <TableCars tableData="userVehicles"/>
               </Home>
             </RequireAuth>}>
           </Route>
@@ -61,7 +61,7 @@ export function AppRoutes() {
             element={
             <RequireAuth>
               <Home>
-                <TableCars/>
+                <TableCars tableData="allVehicles"/>
               </Home>
             </RequireAuth>}>
           </Route>

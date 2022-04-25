@@ -1,56 +1,48 @@
 import { Container, MenuItem } from './styles'
-import CardImage from '../../assets/cardImage1.png'
-import { getVehicleList } from '../../services/api'
-import { useEffect } from 'react'
 
+import CardImage from '../../assets/cardImage-1.png'
+import CardImage2 from '../../assets/cardImage-2.png'
+import CardImage3 from '../../assets/cardImage-3.png'
+import { useAuth } from '../../contexts/auth'
+import { useNavigate } from 'react-router-dom'
 
 export function Menu() {
 
-  useEffect(() => {
-    async function getVehicles() {
-      const listaDeVeiculos = await getVehicleList()
-      console.log(listaDeVeiculos)
+   const { userLogged } = useAuth()
 
-    }
-
-    getVehicles()
-
-
-
-  }, [])
-  
+   const navigate = useNavigate()
   
   return (
     <Container>
       <h1>Bem vindo, Carlos</h1>
       <p>Menu</p>
       <section>
-        <MenuItem>
+        <MenuItem onClick={() => navigate("/meus-veiculos")}>
           <div>
             <h1>Veículos reservados e vendidos</h1>
             <p>Veículos reservados e vendidos por você</p>
-            <span>147 veículos</span>
+            <span>{userLogged?.totalVehiclesLoggedUser} veículos</span>
           </div>
 
           <img src={CardImage} alt="Veículos reservados e vendidos" />
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => navigate("/veiculos")}>
           <div>
-            <h1>Veículos reservados e vendidos</h1>
-            <p>Veículos reservados e vendidos por você</p>
-            <span>147 veículos</span>
+            <h1>Listagem de Veículos</h1>
+            <p>Listagem de veículos de toda a empresa</p>
+            <span>{userLogged?.totalVehicles} veículos</span>
           </div>
 
-          <img src={CardImage} alt="Veículos reservados e vendidos" />
+          <img src={CardImage2} alt="Veículos reservados e vendidos" />
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => navigate("/funcionarios")}>
           <div>
-            <h1>Veículos reservados e vendidos</h1>
-            <p>Veículos reservados e vendidos por você</p>
-            <span>147 veículos</span>
+            <h1>Funcionários da empresa</h1>
+            <p>Listagem de todos os funcionários da empresa</p>
+            <span>{userLogged?.totalEmployees} veículos</span>
           </div>
 
-          <img src={CardImage} alt="Veículos reservados e vendidos" />
+          <img src={CardImage3} alt="Veículos reservados e vendidos" />
         </MenuItem>
       </section>
     </Container>

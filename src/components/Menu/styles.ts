@@ -24,6 +24,7 @@ export const Container = styled.main`
 `
 
 export const MenuItem = styled.div`
+  cursor: pointer;
   margin-top: 3rem;
   margin-bottom: 3rem;
   color: #000;
@@ -39,6 +40,7 @@ export const MenuItem = styled.div`
     display: flex;
     flex-direction: column;
     padding: 3rem;
+    transition: background-color .2s ease-in-out;
 
     h1 {
       color: var(--dark-gray);
@@ -58,6 +60,10 @@ export const MenuItem = styled.div`
       font-size: 1.3rem;
       font-weight: bold;
       color: var(--primary-red);
+    }
+
+    &:hover {
+      background-color: #D6D6D6;
     }
   }
 `

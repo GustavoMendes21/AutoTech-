@@ -35,57 +35,68 @@ interface NewUserType {
   password: string
 }
 
-interface AuthContextType {
-  userLogged: any;
+interface  AuthContextType  {
+  userLogged: UserLoggedType | undefined;
   signIn: (user: NewUserType, callback: VoidFunction) => void;
   signOut: () => void,
   loading: boolean;
+  wrongCredentials: boolean;
 }
 
-const AuthContext = React.createContext<AuthContextType>(null!)
+const AuthContext = React.createContext<AuthContextType>(null!!)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [ userLogged, setUserLogged ] = useState<UserLoggedType | null>()
+  const [ userLogged, setUserLogged ] = useState<UserLoggedType>()
   const [ loading, setLoading ] = useState(true)
+  const [wrongCredentials, setWrongCredentials] = useState(false)
 
   useEffect(() => {
     const recoveredUser = localStorage.getItem("user")
     const recoveredToken = localStorage.getItem("token")
+
     
-    if(recoveredUser  && recoveredToken) {
+    if(recoveredUser && recoveredToken) {
+      const token = JSON.parse(recoveredToken)
       setUserLogged(JSON.parse(recoveredUser))
-      api.defaults.headers.common['Authorization']  = `Bearer ${recoveredToken}`
+      api.defaults.headers.common['Authorization']  = "Bearer " + token
     }
   
     setLoading(false)
   }, [])
   
   async function signIn (newUser: NewUserType, callback: VoidFunction) {
+
     const response = await signInRoute(newUser)
-    const token = response.data.token
-    setUserLogged(response.data)
 
-    localStorage.setItem("user", JSON.stringify(response.data))
-    localStorage.setItem("token", JSON.stringify(token))
+    if(response.status === 200) {
+      const token = response.data.token
+      setUserLogged(response.data)
 
-    api.defaults.headers.common['Authorization']  = `Bearer ${token}`
-
-    callback()
+      localStorage.setItem("user", JSON.stringify(response.data))
+      localStorage.setItem("token", JSON.stringify(token))
+      api.defaults.headers.common['Authorization']  = `Bearer ${token}`
+      callback()
+    }
     
+    if(response.status === 401) {
+      setWrongCredentials(true)
+    }  
   
   }
 
   function signOut() {
-    setUserLogged(null)
+    setUserLogged(undefined)
     localStorage.removeItem("user")
     localStorage.removeItem("token")
     api.defaults.headers.common['Authorization'] = ""
   }
 
-  return <AuthContext.Provider value={{ userLogged, loading ,  signIn, signOut}}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ userLogged, loading ,  signIn, signOut, wrongCredentials}}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
   return useContext(AuthContext)
 }
+
+
 

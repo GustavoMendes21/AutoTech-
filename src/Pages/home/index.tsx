@@ -8,7 +8,9 @@ export function Home({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header>
-        <img src={logo} alt="Logo AutoLuby" />
+        <a href="/">
+          <img src={logo} alt="Logo AutoLuby" />
+        </a>
         <div className="input-search">
           <input type="search" name="searchInput" id="searchInput" />
           <FiSearch size={20}/>

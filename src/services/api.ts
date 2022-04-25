@@ -5,10 +5,15 @@ export const api = axios.create({
 
 })
 
+
 export const signInRoute = async (userData: { email: string, password: string }) => {
   return await api.post("/login", userData)
 }
 
 export const getVehicleList = async () => {
-  return await api.get("https://autoluby.k8s.luby.me/vehicles")
+  return await api.get("/vehicles")
 } 
+
+export const getEmployees = async () => {
+  return await api.get("/employees")
+}
