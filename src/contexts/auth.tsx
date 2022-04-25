@@ -40,7 +40,6 @@ interface  AuthContextType  {
   signIn: (user: NewUserType, callback: VoidFunction) => void;
   signOut: () => void,
   loading: boolean;
-  wrongCredentials: boolean;
 }
 
 const AuthContext = React.createContext<AuthContextType>(null!!)
@@ -48,7 +47,6 @@ const AuthContext = React.createContext<AuthContextType>(null!!)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [ userLogged, setUserLogged ] = useState<UserLoggedType>()
   const [ loading, setLoading ] = useState(true)
-  const [wrongCredentials, setWrongCredentials] = useState(false)
 
   useEffect(() => {
     const recoveredUser = localStorage.getItem("user")
@@ -77,11 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       api.defaults.headers.common['Authorization']  = `Bearer ${token}`
       callback()
     }
-    
-    if(response.status === 401) {
-      setWrongCredentials(true)
-    }  
-  
+      
   }
 
   function signOut() {
@@ -91,7 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     api.defaults.headers.common['Authorization'] = ""
   }
 
-  return <AuthContext.Provider value={{ userLogged, loading ,  signIn, signOut, wrongCredentials}}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ userLogged, loading ,  signIn, signOut}}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {

@@ -80,7 +80,13 @@ export function TableEmployee() {
                 <td>{employee.name}</td>
                 <td>{employee.email}</td>
                 <td>{employee.cpf}</td>
-                <td>R$ {employee.salary}</td>
+                <td>
+                  {
+                      new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }).format(employee.salary)
+                  }</td>
                 <td>{employee.bio}</td>
               </tr>
               ))

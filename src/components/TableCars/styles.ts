@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface TableDataStatusProps {
+  readonly status: string
+}
+
 export const Container = styled.main`
   max-width: 1440px;
   margin: 0 auto;
@@ -14,7 +18,7 @@ export const Container = styled.main`
 
 export const TableWrapper = styled.section`
   width: 100%;
-  height: 680px;
+  min-height: 680px;
   overflow: hidden;
   padding: 1rem;
 
@@ -106,6 +110,32 @@ export const Table = styled.table`
     text-align: center;
     padding: 2.5rem 0;
   }
+`
 
-
+export const TableDataStatus = styled.a<TableDataStatusProps>`
+  ${(props) => {
+    switch (props.status) {
+      case "Vendido" :
+        return `
+          background-color: rgba(245,74,72,.2);
+          color: #F54A48;
+          padding: .3rem 1.8rem;
+          border-radius: .4rem
+        `
+      case "Reservado" :
+        return `
+          background-color: rgba(250, 193,47,.4);
+          color: #FAC12F;
+          padding: .3rem 1.8rem;
+          border-radius: .4rem
+        `
+      case "Disponível" :
+        return `
+          background-color: rgba(52, 195,143,.2);
+          color: #34C38F;
+          padding: .3rem 1.8rem;
+          border-radius: .4rem
+        `
+    }
+  }}
 `

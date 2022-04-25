@@ -9,15 +9,15 @@ export function Login() {
   const [ email, setEmail ] = useState("")
   const [ password, setPassword ] = useState("")
 
-  const { signIn, wrongCredentials } = useAuth()
+  const { signIn } = useAuth()
   const navigate = useNavigate()
   
-  function handleSubmit(event: { preventDefault: () => void; }) {
+  async function handleSubmit(event: { preventDefault: () => void; }) {
     event.preventDefault()
-
     signIn({email, password}, () => {
       navigate("/")
     }) 
+
   }
 
   return (
@@ -32,7 +32,7 @@ export function Login() {
             <FormLogin onSubmit={handleSubmit}>
               <div className="field">
                 <label htmlFor="input-email">Endereço de email</label>
-                <input id="input-email" placeholder="@mail.com" type="email" onChange={(event) => setEmail(event.target.value)}/>
+                <input id="input-email" type="email" placeholder="@mail.com" onChange={(event) => setEmail(event.target.value)}/>
               </div>
 
               <div className="field">

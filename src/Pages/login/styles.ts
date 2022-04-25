@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import BackgroundImage from '../../assets/background-image.png'
 
-
 export const LoginPage = styled.section`
   width: 100%;
   height: 100vh;
@@ -9,7 +8,7 @@ export const LoginPage = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
-` 
+`
 
 export const Container = styled.main`
   img {

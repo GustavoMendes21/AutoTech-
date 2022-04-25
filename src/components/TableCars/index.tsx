@@ -1,4 +1,4 @@
-import { Container, Table, TableWrapper } from "./styles";
+import { Container, Table, TableDataStatus, TableWrapper } from "./styles";
 
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
@@ -100,11 +100,26 @@ export function TableCars({ tableData }: TableCarsProps) {
                   <td>{vehicle.brand}</td>
                   <td>{vehicle.model}</td>
                   <td>{vehicle.yer}</td>
-                  <td>{vehicle.km}</td>
-                  <td>{vehicle.color}</td>
-                  <td>{vehicle.status}</td>
+                  <td>
+                    {
+                      vehicle.km.toLocaleString('en-US')
+                    }
+                  </td>
+                  <td>{vehicle.color.toUpperCase()}</td>
+                  <td>
+                    <TableDataStatus status={vehicle.status}>
+                     {vehicle.status}
+                    </TableDataStatus>
+                  </td>
                   <td>{vehicle.chassi}</td>
-                  <td>R$ {vehicle.value}</td>
+                  <td>
+                    {
+                      new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }).format(vehicle.value)
+                    }
+                  </td>
                 </tr>
               ))
             }

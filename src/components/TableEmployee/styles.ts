@@ -14,7 +14,7 @@ export const Container = styled.main`
 
 export const TableWrapper = styled.section`
   width: 100%;
-  height: 680px;
+  min-height: 680px;
   overflow: hidden;
   padding: 1rem;
 

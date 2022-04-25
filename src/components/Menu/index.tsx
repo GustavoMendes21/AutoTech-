@@ -14,7 +14,7 @@ export function Menu() {
   
   return (
     <Container>
-      <h1>Bem vindo, Carlos</h1>
+      <h1>Bem vindo, {userLogged?.user.name}</h1>
       <p>Menu</p>
       <section>
         <MenuItem onClick={() => navigate("/meus-veiculos")}>

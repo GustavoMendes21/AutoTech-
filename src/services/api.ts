@@ -11,9 +11,9 @@ export const signInRoute = async (userData: { email: string, password: string })
 }
 
 export const getVehicleList = async () => {
-  return await api.get("/vehicles")
+  return await api.get("/vehicles?noPaginate")
 } 
 
 export const getEmployees = async () => {
-  return await api.get("/employees")
+  return await api.get("/employees?noPaginate")
 }
