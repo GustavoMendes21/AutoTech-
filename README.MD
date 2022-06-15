@@ -2,7 +2,7 @@
   <img alt="logo auto tech" src="https://github.com/GustavoMendes21/AutoTech-/blob/main/src/assets/AutoTechLogo.svg">
 </p>
 
-Link do projeto [aqui](https://auto-tech-gustavomendes21.vercel.app/login)
+Link do projeto [aqui](https://auto-tech-gustavomendes21.vercel.app)
 
 ## 🧪 Tecnologias
 
