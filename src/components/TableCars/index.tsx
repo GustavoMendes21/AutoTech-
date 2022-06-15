@@ -4,12 +4,11 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/auth";
-import { getVehicleList } from "../../services/api";
 
 interface Vehicles {
   brand: string,
   model: string,
-  yer: string,
+  yer: number,
   km: number,
   color: string,
   status: string,
@@ -23,7 +22,7 @@ interface TableCarsProps {
 
 export function TableCars({ tableData }: TableCarsProps) {
 
-  const { userLogged } = useAuth()
+  const { userLogged, carList } = useAuth()
   const [vehicles, setVehicles] = useState<Vehicles[]>([])
 
   useEffect(() => {
@@ -34,17 +33,12 @@ export function TableCars({ tableData }: TableCarsProps) {
         setVehicles(userVehicles)
       }
     } else {
-      (async () => {
-        const response = await getVehicleList()
-        const allVehicles = response.data.vehicles
-  
-        if(allVehicles) {
-          setVehicles(allVehicles)
-        }      
-      })()
+      setVehicles(carList)
     }
 
   }, [])
+
+
   
   return (
     <Container>
@@ -52,7 +46,10 @@ export function TableCars({ tableData }: TableCarsProps) {
 
       <TableWrapper>
         <div>
-          <h1>Listagem geral de veículos</h1>
+
+          {
+            tableData === "userVehicles" ? <h1>Listagem de veículos do usuário</h1> :  <h1>Listagem geral de veículos</h1>
+          }
 
           <div className="pagination-wrapper">
             <div className="pagination">
@@ -102,7 +99,7 @@ export function TableCars({ tableData }: TableCarsProps) {
                   <td>{vehicle.yer}</td>
                   <td>
                     {
-                      vehicle.km.toLocaleString('en-US')
+                      vehicle.km.toLocaleString('en-US').replace(",", ".")
                     }
                   </td>
                   <td>{vehicle.color.toUpperCase()}</td>

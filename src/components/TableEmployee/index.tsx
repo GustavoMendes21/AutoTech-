@@ -3,7 +3,7 @@ import { Container, Table, TableWrapper } from "./styles";
 import { BiSearch } from "react-icons/bi";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { getEmployees } from "../../services/api";
+import { useAuth } from "../../contexts/auth";
 
 interface Employee {
   name: string,
@@ -14,28 +14,28 @@ interface Employee {
 }
 
 export function TableEmployee() {
+  const { randomEmployeesList } = useAuth()
   const [ employees, setEmployees ] = useState<Employee[]>()
 
   useEffect(() => {
-    (async () => {
-      const response = await getEmployees()
-      const allEmployees = response.data.employees
-
-      if(allEmployees) {
-        setEmployees(allEmployees)
-      }
-
-
-    })()
+    setEmployees(randomEmployeesList)
   }, [])
+
+  function formatCpf(v: string){
+    v=v.replace(/\D/g,"")                    
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       
+    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") 
+    return v
+  }
 
   return (
     <Container>
-      <h1>Todos os veículos</h1>
+      <h1>Todos os funcionários</h1>
 
       <TableWrapper>
         <div>
-          <h1>Listagem geral de veículos</h1>
+          <h1>Listagem geral de funcionários</h1>
 
           <div className="pagination-wrapper">
             <div className="pagination">
@@ -76,10 +76,10 @@ export function TableEmployee() {
           <tbody>
             {
               employees?.map((employee) => (
-              <tr>
+              <tr key={employee.cpf}>
                 <td>{employee.name}</td>
                 <td>{employee.email}</td>
-                <td>{employee.cpf}</td>
+                <td>{formatCpf(employee.cpf.toString())}</td>
                 <td>
                   {
                       new Intl.NumberFormat('pt-BR', {

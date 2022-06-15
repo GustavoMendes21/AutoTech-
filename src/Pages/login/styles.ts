@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import BackgroundImage from '../../assets/background-image.png'
+import BackgroundImage from '../../assets/background-image.jpg'
 
 export const LoginPage = styled.section`
   width: 100%;
@@ -10,12 +10,7 @@ export const LoginPage = styled.section`
   overflow: hidden;
 `
 
-export const Container = styled.main`
-  img {
-    padding-left: 15rem;
-    padding-top: 7rem;
-  }
-  
+export const Container = styled.main` 
   div {
     width: 42.5rem;
     display: flex;
@@ -31,6 +26,11 @@ export const Content = styled.div`
   height: calc(100vh - 14rem);
 
   background-color: #ffff;
+
+  img {
+    height: 20rem;
+    margin-bottom: 6rem;
+  }
 
   h1 {
     font-size: 3.7rem;
@@ -65,9 +65,6 @@ export const Content = styled.div`
 
 export const FormLogin = styled.form`
   color: black;
-
-  margin-top: 2rem;
-
   .field {
     display: flex;
     flex-direction: column;
@@ -159,6 +156,7 @@ export const FormLogin = styled.form`
     border-radius: .4rem;
     font-weight: 600;
     font-size: 1.4rem;
+    margin-top: 2.4rem;
     margin-bottom: 4rem;
     transition: filter .2s ease-in-out;
     &:hover {
@@ -173,4 +171,5 @@ export const BackgroundHome = styled.img.attrs({
 })`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `

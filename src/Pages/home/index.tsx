@@ -1,5 +1,5 @@
 import { SignoutButton } from '../../components/SignoutButton'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/AutoTechLogo.svg'
 import { Header, Container } from './styles'
 import { FiSearch } from "react-icons/fi";
 

@@ -5,6 +5,7 @@ export const Container = styled.main`
   width: 100%;
   height: calc(100vh - 120px);
   margin: 0 auto;
+  text-transform: capitalize;
 
   h1 {
     font-size: 3rem;
@@ -34,6 +35,11 @@ export const MenuItem = styled.div`
   border: 1px solid #E6E6E6;
   border-radius: .4rem;
 
+  img {
+      width: 500px;
+      object-fit: cover;
+  }
+
   > div {
     width: 100%;
     height: 100%;
@@ -61,6 +67,8 @@ export const MenuItem = styled.div`
       font-weight: bold;
       color: var(--primary-red);
     }
+
+
 
     &:hover {
       background-color: #D6D6D6;

@@ -1,8 +1,8 @@
 import { Container, MenuItem } from './styles'
 
-import CardImage from '../../assets/cardImage-1.png'
-import CardImage2 from '../../assets/cardImage-2.png'
-import CardImage3 from '../../assets/cardImage-3.png'
+import CardImage from '../../assets/cardImage-1.jpg'
+import CardImage2 from '../../assets/cardImage-2.jpg'
+import CardImage3 from '../../assets/cardImage-3.jpg'
 import { useAuth } from '../../contexts/auth'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,7 +14,7 @@ export function Menu() {
   
   return (
     <Container>
-      <h1>Bem vindo, {userLogged?.user.name}</h1>
+      <h1>Bem vindo, <strong>{userLogged?.user.name}</strong></h1>
       <p>Menu</p>
       <section>
         <MenuItem onClick={() => navigate("/meus-veiculos")}>
@@ -39,7 +39,7 @@ export function Menu() {
           <div>
             <h1>Funcionários da empresa</h1>
             <p>Listagem de todos os funcionários da empresa</p>
-            <span>{userLogged?.totalEmployees} veículos</span>
+            <span>{userLogged?.totalEmployees} funcionários</span>
           </div>
 
           <img src={CardImage3} alt="Veículos reservados e vendidos" />

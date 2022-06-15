@@ -9,9 +9,10 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 3.1rem;
+  padding-bottom: 0;
 
   img {
-    height: 5.7rem;
+    height: 10rem;
   }
 
   .input-search {
